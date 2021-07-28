@@ -1,14 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { ApolloProvider } from "@apollo/client";
+import React from "react";
+import ReactDOM from "react-dom";
+import "./css/bootstrap.min.css";
+import { client } from "./graphQl/client";
+import MainContent from "./mainContent";
+import reportWebVitals from "./reportWebVitals";
+
+console.log(process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <MainContent />
+    </ApolloProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
