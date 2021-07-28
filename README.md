@@ -1,3 +1,15 @@
+## 準備
+
+- github のトークンを取得します
+  - github にログインし、アカウント →setting→Developer setting→Personal access token から token を発行してください
+  - チェックボックスの内容は repo と user 全てにチェックをします
+- .env ファイルを作成
+- env ファイルに`REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN=<token>`を記載
+
+## 動かし方
+
+`yarn start`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
