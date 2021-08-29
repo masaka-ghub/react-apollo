@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { RelayEnvironmentProvider } from "react-relay/hooks";
 import "./css/bootstrap.min.css";
@@ -11,9 +11,7 @@ console.log(process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN);
 ReactDOM.render(
   <React.StrictMode>
     <RelayEnvironmentProvider environment={RelayEnvironment}>
-      <Suspense fallback={"Loading..."}>
-        <MainContent />
-      </Suspense>
+      <MainContent />
     </RelayEnvironmentProvider>
   </React.StrictMode>,
   document.getElementById("root")
