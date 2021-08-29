@@ -1,31 +1,28 @@
-import { useQuery } from "@apollo/client";
 import { useState } from "react";
+import { useLazyLoadQuery } from "react-relay/hooks";
 import { KeywordPullDown } from "./component/keywordPullDown";
-import { repositoryQuery } from "./graphQl/query";
+import RepositoryName from "./graphQl/RepositoryName";
 
-function MainContent() {
+const MainContent = () => {
   const [keyword, setKeyword] = useState("react");
-  // 独自にカスタムフックを使ってもできることはできる
-  // const { repositories } = useRepositories();
-
-  // useQueryカスタムフックが用意されているのでそっちを使う
-  console.log(keyword);
-  const { loading, data } = useQuery(repositoryQuery(keyword));
+  const data = useLazyLoadQuery(
+    RepositoryName,
+    { query: `${keyword} in:readme` },
+    { fetchPolicy: "store-and-network" }
+  );
 
   return (
     <div className="container">
       <KeywordPullDown value={keyword} onSelected={(v) => setKeyword(v)} />
       <ul className="list-group">
-        {loading && "..."}
-        {!loading &&
-          data.search.nodes.map((r, i) => (
-            <li key={i} className="list-group-item">
-              <a href={r.url}>{r.url}</a>
-            </li>
-          ))}
+        {data.search.nodes.map((r, i) => (
+          <li key={i}>
+            <a href={r.url}>{r.url}</a>
+          </li>
+        ))}
       </ul>
     </div>
   );
-}
+};
 
 export default MainContent;
